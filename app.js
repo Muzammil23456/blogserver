@@ -14,7 +14,7 @@ const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 
-// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: true, origin: 'http://ebrandworks.com' }))
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
@@ -94,7 +94,7 @@ app.post('/post', upload.single('file'), async (req, res) => {
 
 app.get('/post', async (req, res) => {
 
-    res.json(await Post.find()
+    res.status(200).json(await Post.find()
         .populate('author', ['username'])
         .sort({ createdAt: -1 })
         .limit(20))
@@ -149,7 +149,6 @@ app.get('*',(req,res,next)=>{
       message:'bad request'
     })
   })
-
 
 module.exports = app;
 
