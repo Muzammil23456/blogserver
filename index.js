@@ -14,6 +14,7 @@ const fs = require('fs')
 const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
+const port = process.env.PORT || 3000;
 
 // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
@@ -146,7 +147,7 @@ app.put('/post', upload.single('file'), async (req, res) => {
 
 
 
-app.listen(3001, () => console.log('port 3001'));
+app.listen(port, () => console.log(`port ${port}`));
 
 // i18kUH1MF3Hl2wOX
 // mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority
