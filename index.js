@@ -14,8 +14,6 @@ const fs = require('fs')
 const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
-const port = process.env.PORT_NO || '3000';
-const Database = process.env.DATABASE ;
 
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
@@ -23,7 +21,7 @@ app.use(cookieParser());
 app.use('/upload', express.static(__dirname + '/upload'));
 
 
-mongoose.connect(Database).catch(err => console.log(err));
+mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
@@ -147,7 +145,7 @@ app.put('/post', upload.single('file'), async (req, res) => {
 
 
 
-app.listen(port, () => console.log(port));
+app.listen(3001, () => console.log('port 3001'));
 
 // i18kUH1MF3Hl2wOX
 // mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority
