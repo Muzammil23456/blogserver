@@ -14,7 +14,7 @@ const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 
-app.use(cors({ credentials: true, origin: 'http://ebrandworks.com' }))
+app.use(cors({ credentials: true, origin: 'https://64c197451c7fdc1a986e2470--cool-starlight-d5f3e7.netlify.app/' }))
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
