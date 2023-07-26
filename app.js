@@ -1,4 +1,3 @@
-
 const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
@@ -14,7 +13,7 @@ const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 
-app.use(cors({ credentials: true, origin: 'https://blog-pk2.netlify.app/' }))
+app.use(cors({ credentials: true, origin: 'https://blog-pk2.netlify.app' }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/upload', express.static(__dirname + '/upload'));
