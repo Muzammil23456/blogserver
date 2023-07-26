@@ -144,6 +144,12 @@ app.put('/post', upload.single('file'), async (req, res) => {
     });
 })
 
+app.get('*',(req,res,next)=>{
+    res.status(200).json({
+      message:'bad request'
+    })
+  })
+
 
 module.exports = app;
 
