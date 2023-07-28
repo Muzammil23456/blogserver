@@ -107,8 +107,8 @@ app.get('/post/:id', async (req, res) => {
 
 app.delete('/post/delete/:id', async (req, res) => {
     const { id } = req.params;
-    const postDoc = await Post.findById(id);  
-    await postDoc.deleteOne();  
+    const postDoc = await Post.findById(id);
+    await postDoc.deleteOne();
     res.json('done');
 })
 
@@ -142,13 +142,13 @@ app.put('/post', upload.single('file'), async (req, res) => {
         res.json(postDoc);
     });
 
-    app.get('*',(req,res,next)=>{
-        res.status(200).json({
-          message:'bad request'
-        })
-      })
 })
 
+app.get('*', (req, res, next) => {
+    res.status(200).json({
+        message: 'bad request'
+    })
+})
 module.exports = app;
 
 // i18kUH1MF3Hl2wOX
