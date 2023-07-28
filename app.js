@@ -1,5 +1,4 @@
 const express = require('express')
-import "dotenv/config";
 const app = express()
 const mongoose = require("mongoose")
 const User = require('./api/Model/User')
@@ -24,7 +23,7 @@ app.use('/upload', express.static(__dirname + '/upload'));
 
 
 
-mongoose.connect(process.env.MONGODB_URL).catch(err => console.log(err));
+mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
