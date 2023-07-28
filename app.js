@@ -1,5 +1,4 @@
 const express = require('express')
-var router = express.Router();
 const app = express()
 const mongoose = require("mongoose")
 const User = require('./api/Model/User')
@@ -22,7 +21,7 @@ app.use('/upload', express.static(__dirname + '/upload'));
 
 mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
-router.post('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     const { username, password } = req.body;
     try {
         const userDoc = await User.create({ username, password: bcrypt.hashSync(password, salt) });
@@ -32,7 +31,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const { Username, Password } = req.body
     const Userdoc = await User.findOne({ username: Username });
     if (Userdoc !== null) {
@@ -55,43 +54,44 @@ router.post('/login', async (req, res) => {
 
 });
 
-router.get('/profile', (req, res) => {
-    // const { token } = req.cookies;
-    // jwt.verify(token, secret, {}, (err, info) => {
-    //     if (err) throw err;
-    //     res.json(info);
-    // });
-    console.log()
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) throw err;
+        res.json(info);
+    });
+    // console.log('hgjgi')
 });
 
-router.post('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok')
 })
 
-router.post('/post', upload.single('file'), async (req, res) => {
-    const { originalname, path } = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    const newPath = path + '.' + ext;
-    fs.renameSync(path, newPath);
+app.post('/post', upload.single('file'), async (req, res) => {
+    // const { originalname, path } = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path + '.' + ext;
+    // fs.renameSync(path, newPath);
 
-    const { token } = req.cookies;
-    jwt.verify(token, secret, {}, async (err, info) => {
-        if (err) throw err;
-        const { title, summary, content } = req.body;
-        const postDoc = await Post.create({
-            title,
-            summary,
-            content,
-            cover: newPath,
-            author: info.id,
-        })
-        res.json(postDoc);
-    });
+    // const { token } = req.cookies;
+    // jwt.verify(token, secret, {}, async (err, info) => {
+    //     if (err) throw err;
+    //     const { title, summary, content } = req.body;
+    //     const postDoc = await Post.create({
+    //         title,
+    //         summary,
+    //         content,
+    //         cover: newPath,
+    //         author: info.id,
+    //     })
+    //     res.json(postDoc);
+    // });
+    res.status(200).json('jfjgf')
 
 })
 
-router.get('/post', async (req, res) => {
+app.get('/post', async (req, res) => {
 
     res.status(200).json(await Post.find()
         .populate('author', ['username'])
@@ -99,20 +99,20 @@ router.get('/post', async (req, res) => {
         .limit(20))
 });
 
-router.get('/post/:id', async (req, res) => {
+app.get('/post/:id', async (req, res) => {
     const { id } = req.params;
     const postDoc = await Post.findById(id).populate('author', ['username']);
     res.json(postDoc);
 })
 
-router.delete('/post/delete/:id', async (req, res) => {
+app.delete('/post/delete/:id', async (req, res) => {
     const { id } = req.params;
     const postDoc = await Post.findById(id);
     await postDoc.deleteOne();
     res.json('done');
 })
 
-router.put('/post', upload.single('file'), async (req, res) => {
+app.put('/post', upload.single('file'), async (req, res) => {
     let newPath = null;
     if (req.file) {
         const { originalname, path } = req.file;
@@ -144,7 +144,7 @@ router.put('/post', upload.single('file'), async (req, res) => {
 
 })
 
-router.get('*', (req, res, next) => {
+app.get('*', (req, res, next) => {
     res.status(200).json({
         message: 'bad request'
     })
