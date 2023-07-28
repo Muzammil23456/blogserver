@@ -1,4 +1,5 @@
 const express = require('express')
+import "dotenv/config";
 const app = express()
 const mongoose = require("mongoose")
 const User = require('./api/Model/User')
@@ -12,7 +13,8 @@ const fs = require('fs')
 const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
-const port = 3001
+const port = process.env.PORT || 3001;
+import http from 'http'
 
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
@@ -22,7 +24,7 @@ app.use('/upload', express.static(__dirname + '/upload'));
 
 
 
-mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
+mongoose.connect(process.env.MONGODB_URL).catch(err => console.log(err));
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
@@ -151,7 +153,9 @@ app.get('*', (req, res, next) => {
     })
 })
 
-app.listen(port, () => console.log(`port ${port}`));
+const server = http.createServer(app)
+
+server.listen(port, () => console.log(`port ${port}`));
 
 
 // i18kUH1MF3Hl2wOX
