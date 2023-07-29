@@ -55,11 +55,12 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-    const { token } = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
-        if (err) throw err;
-        res.json(info);
-    });
+    // const { token } = req.cookies;
+    // jwt.verify(token, secret, {}, (err, info) => {
+    //     if (err) throw err;
+    //     res.json(info);
+    // });
+    res.json('jguhihk')
 });
 
 app.post('/logout', (req, res) => {
