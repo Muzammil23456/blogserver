@@ -60,7 +60,6 @@ app.get('/profile', (req, res) => {
         if (err) throw err;
         res.json(info);
     });
-    // console.log('hgjgi')
 });
 
 app.post('/logout', (req, res) => {
@@ -144,12 +143,11 @@ app.put('/post', upload.single('file'), async (req, res) => {
 
 app.get('*', (req, res, next) => {
     res.status(200).json({
-        message: 'bad request'
+        message: 'success'
     })
 })
 
-
-app.listen(port, () => console.log(`port ${port}`));
+app.listen(3001,()=> { console.log(`port 3001`)})
 
 
 // i18kUH1MF3Hl2wOX
