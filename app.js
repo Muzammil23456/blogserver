@@ -14,7 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 const port = process.env.PORT || 3000;
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: true, origin: 'http://localhost:3000'}))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/upload', express.static(__dirname + '/upload'));
@@ -82,7 +82,7 @@ app.post('/post', async (req, res) => {
             title,
             summary,
             content,
-            // cover: newPath,
+            cover: newPath,
             author: info.id,
         })
         res.json(postDoc);
