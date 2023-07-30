@@ -12,7 +12,7 @@ const fs = require('fs')
 const upload = multer({ dest: 'upload/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 app.use(cors({ credentials: true, origin: 'https://blog-pk2.netlify.app' }))
 app.use(express.json())
@@ -148,7 +148,7 @@ app.get('*', (req, res, next) => {
     })
 })
 
-app.listen(3001,()=> { console.log(`port 3001`)})
+app.listen(port,()=> { console.log(`port 3000`)})
 
 
 // i18kUH1MF3Hl2wOX
