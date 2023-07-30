@@ -90,7 +90,7 @@ app.post('/post', upload.single('file'), async (req, res) => {
     res.json('dfasdfksldjf')
 })
 
-app.get('/post', async (req, res) => {
+app.get('/posts', async (req, res) => {
 
     res.status(200).json(await Post.find()
         .populate('author', ['username'])
