@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
 app.use(cookieParser());
-// app.use('/upload', express.static(__dirname + '/upload'));
+app.use('/upload', express.static(__dirname + '/upload'));
 
 mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
