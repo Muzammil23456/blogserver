@@ -14,7 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 const port = process.env.PORT || 3000;
 
-app.use(cors({ credentials: true, origin: 'https://blog-pk2.netlify.app' }))
+app.use(cors({ origin:'*' , credentials:true , optionSuccessStatus:200, }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/upload', express.static(__dirname + '/upload'));
