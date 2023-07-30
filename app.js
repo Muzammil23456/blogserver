@@ -14,7 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 const port = process.env.PORT || 3000;
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000'}))
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/upload', express.static(__dirname + '/upload'));
@@ -40,7 +40,7 @@ app.post('/login', async (req, res) => {
             // logged inrs
             jwt.sign({ Username, id: Userdoc.id }, secret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie('token', token ,{sameSite: "none", secure:"true" }).json({
+                res.cookie('token', token, { sameSite: "none", secure: "true" }).json({
                     id: Userdoc._id,
                     Username,
                 })
@@ -63,10 +63,10 @@ app.get('/profile', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    res.cookie("token", '',{sameSite: "none", secure:"true" }).json('ok')
+    res.cookie("token", '', { sameSite: "none", secure: "true" }).json('ok')
 })
 
-app.post('/post', upload.single('file') , async (req, res) => {
+app.post('/post', upload.single('file'), async (req, res) => {
     const { originalname, path } = req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
@@ -148,7 +148,7 @@ app.get('*', (req, res, next) => {
     })
 })
 
-app.listen(port,()=> { console.log(`port 3000`)})
+app.listen(port, () => { console.log(`port 3000`) })
 
 
 // i18kUH1MF3Hl2wOX
