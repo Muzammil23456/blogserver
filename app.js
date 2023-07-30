@@ -86,7 +86,7 @@ app.post('/post', async (req, res) => {
     //     })
     //     res.json(postDoc);
     // });
-    res.json(req)
+    res.json(req.body)
 })
 
 app.get('/posts', async (req, res) => {
