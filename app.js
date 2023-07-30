@@ -87,7 +87,7 @@ app.post('/post', async (req, res) => {
     //     })
     //     res.json(postDoc);
     // });
-    res.json('dfasdfksldjf')
+    res.json(req)
 })
 
 app.get('/posts', async (req, res) => {
