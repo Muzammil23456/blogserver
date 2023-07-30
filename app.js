@@ -64,8 +64,7 @@ app.get('/profile', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    const { token } = req.cookies;
-    res.cookie(token, null , {sameSite: "none", secure:"true"}).json('ok')
+    res.cookie("token", '' , {sameSite: "none", secure:"true"}).json('ok')
 })
 
 app.post('/post', async (req, res) => {
