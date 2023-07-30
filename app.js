@@ -82,7 +82,7 @@ app.post('/post', async (req, res) => {
             title,
             summary,
             content,
-            cover: newPath,
+            // cover: newPath,
             author: info.id,
         })
         res.json(postDoc);
