@@ -60,11 +60,10 @@ app.get('/profile', (req, res) => {
         if (err) throw err;
         res.json(info);
     });
-    // res.json('jguhihk')
 });
 
 app.post('/logout', (req, res) => {
-    res.cookie("token", '').json('ok')
+    res.cookie("token", '',{sameSite: "none", secure:"true" }).json('ok')
 })
 
 app.post('/post', async (req, res) => {
