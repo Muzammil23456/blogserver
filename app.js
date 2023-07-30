@@ -66,7 +66,7 @@ app.post('/logout', (req, res) => {
     res.cookie("token", '',{sameSite: "none", secure:"true" }).json('ok')
 })
 
-app.post('/post', async (req, res) => {
+app.post('/post', upload.single('file') , async (req, res) => {
     const { originalname, path } = req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
