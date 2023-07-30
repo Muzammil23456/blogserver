@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
 app.use(cookieParser());
-app.use('/upload', express.static(__dirname + '/upload'));
+// app.use('/upload', express.static(__dirname + '/upload'));
 
 mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
@@ -67,7 +67,7 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '', {sameSite: "none", secure:"true" }).json('ok')
 })
 
-app.post('/post', upload.single('file'), async (req, res) => {
+app.post('/post', async (req, res) => {
     // const { originalname, path } = req.file;
     // const parts = originalname.split('.');
     // const ext = parts[parts.length - 1];
