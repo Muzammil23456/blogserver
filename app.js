@@ -13,13 +13,13 @@ const upload = multer({ dest: 'uploads/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 const port = process.env.PORT || 3000;
-const DATABASE = process.env.MONGODB_URL
+
 app.use(cors({ origin:'http://localhost:3000', credentials:true, optionSuccessStatus:200, }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect(DATABASE).catch(err => console.log(err));
+mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
@@ -66,7 +66,7 @@ app.post('/logout', (req, res) => {
     res.cookie("token", '', { sameSite: "none", secure: "true" }).json('ok')
 })
 
-app.post('/post', upload.single('files'), async (req, res) => {
+app.post('/post', upload.single('file'), async (req, res) => {
     // const { originalname, path } = req.body.file;
     // const parts = originalname.split('.');
     // const ext = parts[parts.length - 1];
@@ -87,7 +87,7 @@ app.post('/post', upload.single('files'), async (req, res) => {
     //     res.json(postDoc);
     // });
 
-    res.json(req.files)
+    res.json(req.file)
 })
 
 app.get('/posts', async (req, res) => {
