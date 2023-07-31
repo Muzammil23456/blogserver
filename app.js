@@ -13,13 +13,13 @@ const upload = multer({ dest: 'uploads/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
 const port = process.env.PORT || 3000;
-
+const DATABASE = process.env.MONGODB_URL
 app.use(cors({ origin:'http://localhost:3000', credentials:true, optionSuccessStatus:200, }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://muzmuh200322:i18kUH1MF3Hl2wOX@cluster0.pmfs9ax.mongodb.net/?retryWrites=true&w=majority').catch(err => console.log(err));
+mongoose.connect(DATABASE).catch(err => console.log(err));
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
