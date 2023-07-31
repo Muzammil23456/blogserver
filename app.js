@@ -89,8 +89,8 @@ app.post('/post', upload.single('file'), async (req, res) => {
 
 
 
-    
-    res.json(req.body.file[0])
+
+    res.json(req.body.file)
 })
 
 app.get('/posts', async (req, res) => {
