@@ -12,9 +12,9 @@ const fs = require('fs')
 const upload = multer({ dest: 'uploads/' })
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfghjkwertyuiodfghjkertyui456d5444sdfgnghjkfeteturiy45dgdty45rtdtddt'
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
-app.use(cors({ origin:'http://localhost:3000', credentials:true, optionSuccessStatus:200, }))
+app.use(cors({ origin:'http://www.ebrandworks.com', credentials:true, optionSuccessStatus:200, }))
 app.use(express.json())
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -67,27 +67,27 @@ app.post('/logout', (req, res) => {
 })
 
 app.post('/post', upload.single('file'), async (req, res) => {
-    // const { originalname, path } = req.body.file;
-    // const parts = originalname.split('.');
-    // const ext = parts[parts.length - 1];
-    // const newPath = path + '.' + ext;
-    // fs.renameSync(path, newPath);
+    const { originalname, path } = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    const newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
 
-    // const { token } = req.cookies;
-    // jwt.verify(token, secret, {}, async (err, info) => {
-    //     if (err) throw err;
-    //     const { title, summary, content } = req.body;
-    //     const postDoc = await Post.create({
-    //         title,
-    //         summary,
-    //         content,
-    //         cover: newPath,
-    //         author: info.id,
-    //     })
-    //     res.json(postDoc);
-    // });
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        const { title, summary, content } = req.body;
+        const postDoc = await Post.create({
+            title,
+            summary,
+            content,
+            cover: newPath,
+            author: info.id,
+        })
+        res.json(postDoc);
+    });
 
-    res.json(req.file)
+    // res.json(req.file)
 })
 
 app.get('/posts', async (req, res) => {
